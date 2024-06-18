@@ -4,6 +4,7 @@ const multer = require("multer");
 const path = require("path");
 const cors = require("cors");
 const fs = require("fs");
+require("dotenv").config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -21,13 +22,10 @@ if (!fs.existsSync(uploadsDir)) {
 }
 
 // MongoDB ga ulanish
-mongoose.connect(
-  "mongodb+srv://boburovshukurilo:g9s4rgJLwhpFLVVv@cluster0.dkb378k.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  }
-);
+mongoose.connect(process.env.MONGO_URL, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
 // Ma'lumot modeli
 const ItemSchema = new mongoose.Schema({
